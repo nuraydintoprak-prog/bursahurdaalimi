@@ -100,6 +100,7 @@ p { margin: 0 0 1em; }
 .media { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); }
 .media img { width: 100%; height: 100%; object-fit: cover; }
 .media--hero { aspect-ratio: 3 / 2; box-shadow: var(--shadow); border: 6px solid #fff; }
+.media--banner { aspect-ratio: 16 / 9; margin: 0 0 40px; box-shadow: var(--shadow); border: 6px solid #fff; }
 .media__tag { position: absolute; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: var(--ink); color: #fff; font-weight: 800; font-size: .95rem; box-shadow: var(--shadow); }
 .media__tag .ic { color: var(--brand-2); width: 22px; height: 22px; }
 .media figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 16px 12px; background: linear-gradient(transparent, rgba(16, 18, 20, .82)); color: #fff; font-family: "Oswald", sans-serif; font-size: 1.05rem; letter-spacing: .02em; }
