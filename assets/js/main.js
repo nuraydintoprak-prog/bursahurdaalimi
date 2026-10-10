@@ -1,0 +1,98 @@
+(function () {
+  'use strict';
+
+  var body = document.body;
+  var hamburger = document.getElementById('hamburger');
+  var WA = '905353480448';
+
+  // Mobil menü
+  if (hamburger) {
+    hamburger.addEventListener('click', function () {
+      var open = body.classList.toggle('nav-open');
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  document.querySelectorAll('.nav a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      body.classList.remove('nav-open');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Yıl
+  document.querySelectorAll('[data-year]').forEach(function (el) {
+    el.textContent = new Date().getFullYear();
+  });
+
+  // Görünür olunca belirme
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('is-in'); });
+  }
+
+  // Gerçek etkileşim izi: AntiClick sunucusundaki "sahte arama" kuralıyla aynı ölçüt
+  // (en az 3 sn sayfada kalma + fare/dokunma/kaydırma/klavye etkileşimi).
+  var loadedAt = Date.now();
+  var engaged = false;
+  ['mousemove', 'touchstart', 'scroll', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { engaged = true; }, { passive: true, once: true });
+  });
+
+  // GTM dönüşüm olayları: AntiClick ziyaretçiyi temiz onaylarsa gönderilir (bot tıklaması dönüşüm sayılmaz).
+  // AntiClick yüklenemezse olay yine gönderilir. Kod ile tetiklenen (isTrusted=false), sayfa açılır
+  // açılmaz ya da hiçbir etkileşim olmadan yapılan tıklamalar dönüşüm sayılmaz.
+  function pushClean(ev, domEvent) {
+    if (domEvent && (!domEvent.isTrusted || !engaged || Date.now() - loadedAt < 3000)) return;
+    window.dataLayer = window.dataLayer || [];
+    var ac = window.AntiClick;
+    if (ac && typeof ac.isClean === 'function') {
+      ac.isClean().then(function (ok) { if (ok) window.dataLayer.push(ev); });
+    } else {
+      window.dataLayer.push(ev);
+    }
+  }
+
+  // Arama / WhatsApp tıklamaları
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.getAttribute('data-cf-trap') === '1') return;
+    var href = a.getAttribute('href').toLowerCase();
+    if (href.indexOf('tel:') === 0) pushClean({ event: 'arama_tiklama' }, e);
+    else if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) pushClean({ event: 'whatsapp_tiklama' }, e);
+  }, true);
+
+  // Fiyat talep formu -> WhatsApp mesajı
+  var form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var data = new FormData(form);
+      var lines = [
+        'Merhaba Hurdacı Servet,',
+        'Ad Soyad: ' + (data.get('ad') || ''),
+        'Telefon: ' + (data.get('telefon') || ''),
+        'Hurda cinsi: ' + (data.get('cins') || ''),
+        'Yaklaşık miktar: ' + (data.get('miktar') || '-'),
+        'Adres / açıklama: ' + (data.get('mesaj') || '-')
+      ];
+      // GTM: Google Ads gelişmiş dönüşümleri için telefon E.164 biçiminde (+905xxxxxxxxx) gönderilir.
+      var tel = String(data.get('telefon') || '').replace(/\D/g, '');
+      if (tel.length === 12 && tel.indexOf('90') === 0) tel = tel.slice(2);
+      if (tel.length === 11 && tel.charAt(0) === '0') tel = tel.slice(1);
+      var ev = { event: 'form_gonder', hurda_cinsi: data.get('cins') || '' };
+      if (/^5\d{9}$/.test(tel)) ev.user_data = { phone_number: '+90' + tel };
+      pushClean(ev, e);
+      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    });
+  }
+})();
