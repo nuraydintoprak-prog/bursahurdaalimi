@@ -223,7 +223,7 @@ a.ccard:hover { border-color: var(--brand); }
 /* Footer */
 .footer { padding: 50px 0 100px; background: #1d2126; color: #b9c0c8; font-size: .92rem; }
 .footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; }
-.footer h4 { color: #fff; font-family: "Oswald", "Oswald Fallback", sans-serif; font-weight: 600; margin: 0 0 10px; font-size: 1.05rem; }
+.footer .footer__title { color: #fff; font-family: "Oswald", "Oswald Fallback", sans-serif; font-weight: 600; margin: 0 0 10px; font-size: 1.05rem; }
 .footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .footer a:hover { color: var(--brand-2); }
 .footer__bottom { margin-top: 28px; padding-top: 18px; border-top: 1px solid #343a41; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: .85rem; }
