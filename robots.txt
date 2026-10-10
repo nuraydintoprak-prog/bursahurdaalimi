@@ -13,4 +13,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://hurdaciservet.com.tr/sitemap.xml
+Sitemap: https://bursahurdaalimi.com.tr/sitemap.xml
