@@ -60,8 +60,10 @@ p { margin: 0 0 1em; }
 .header { position: sticky; top: 0; z-index: 50; background: rgba(15, 18, 21, .92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
 .header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
 .logo { display: flex; align-items: center; gap: 10px; font-family: "Oswald", sans-serif; font-weight: 700; font-size: 1.35rem; letter-spacing: .02em; }
-.logo__mark { width: 38px; height: 38px; }
-.logo small { display: block; font-family: "Inter", sans-serif; font-size: .7rem; font-weight: 500; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; margin-top: -2px; }
+/* Logo siyah yazılı: koyu zeminde beyaz rozet içinde gösterilir */
+.logo img, .footer__logo img { display: block; height: 44px; width: auto; }
+.logo { background: #fff; padding: 5px 12px; border-radius: 12px; }
+.footer__logo { display: inline-block; background: #fff; padding: 6px 14px; border-radius: 12px; margin-bottom: 14px; }
 .nav { display: flex; gap: 22px; align-items: center; }
 .nav a { color: var(--muted); font-weight: 500; font-size: .95rem; }
 .nav a:hover { color: var(--text); }
@@ -86,10 +88,8 @@ p { margin: 0 0 1em; }
 .media { position: relative; border-radius: var(--radius); overflow: hidden; background:
   repeating-linear-gradient(135deg, #1b2027 0 14px, #181c22 14px 28px); border: 1px solid var(--line); }
 .media img { width: 100%; height: 100%; object-fit: cover; }
-.media--hero { aspect-ratio: 4 / 3.4; box-shadow: var(--shadow); }
-.media__ph { position: absolute; inset: 0; display: grid; place-content: center; gap: 10px; text-align: center; color: var(--muted); padding: 20px; }
-.media__ph svg { width: 64px; height: 64px; margin: 0 auto; color: var(--copper); fill: currentColor; opacity: .85; }
-.media__ph b { color: var(--text); font-family: "Oswald", sans-serif; font-size: 1.3rem; letter-spacing: .02em; }
+.media--hero { aspect-ratio: 3 / 2; box-shadow: var(--shadow); }
+.media figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 16px 12px; background: linear-gradient(transparent, rgba(10, 12, 14, .85)); font-family: "Oswald", sans-serif; font-size: 1.05rem; letter-spacing: .02em; }
 
 /* Bölümler */
 section { scroll-margin-top: 80px; }
@@ -135,7 +135,7 @@ section { scroll-margin-top: 80px; }
 
 /* Galeri */
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.gallery .media { aspect-ratio: 4 / 3; }
+.gallery .media { aspect-ratio: 4 / 3; margin: 0; }
 
 /* Müşteri yorumları */
 .reviews-head { margin: 52px 0 20px; }
@@ -145,8 +145,7 @@ section { scroll-margin-top: 80px; }
 .review p { color: var(--text); margin: 0 0 14px; }
 .review footer { display: flex; flex-direction: column; font-size: .9rem; }
 .review footer span { color: var(--muted); }
-.review--empty { border-style: dashed; }
-.review--empty p, .review--empty footer b { color: var(--muted); font-style: italic; }
+.review__stars { display: block; color: var(--copper-2); letter-spacing: .12em; font-size: 1.05rem; margin-bottom: 8px; }
 
 /* Bölgeler */
 .areas { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -235,6 +234,8 @@ section { scroll-margin-top: 80px; }
 }
 @media (max-width: 600px) {
   .section { padding: 56px 0; }
+  .logo img { height: 36px; }
+  .logo { padding: 4px 9px; }
   .features, .steps, .form__grid, .footer__grid { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr; }
   .header__cta .btn--call span.txt { display: none; }
