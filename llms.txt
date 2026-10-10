@@ -1,10 +1,12 @@
 # Hurdacı Servet
 
-> Bursa'da metal hurda alımı yapan işletme. Yalnızca metal hurda alır; kağıt, karton ve plastik almaz.
+> Hurdacı Servet (Servet Hurdacı), Bursa'da metal hurda alımı yapan bir hurdacıdır. Hurdayı adresinizden alır, gözünüzün önünde tartar ve ödemeyi kapıda nakit yapar. Yalnızca metal hurda alır; kağıt, karton ve plastik almaz.
 
-- Telefon / WhatsApp: 0535 348 04 48
+- Telefon / WhatsApp: 0535 348 04 48 (+90 535 348 04 48)
 - Adres: Alemdar Mahallesi 1. Vatan Sokak No:19, Bursa
-- Hizmet bölgesi: Bursa geneli (Osmangazi, Yıldırım, Nilüfer, Gürsu, Kestel, Mudanya, Gemlik, İnegöl ve OSB'ler)
+- Ödeme: Kapıda nakit
+- Hizmet bölgesi: Bursa geneli — Osmangazi, Yıldırım, Nilüfer, Gürsu, Kestel, Mudanya, Gemlik, İnegöl, Görükle, Demirtaş OSB, Nilüfer OSB
+- Web: https://bursahurdaalimi.com.tr/
 
 ## Alınan metal hurdalar
 Bakır, sarı (pirinç), alüminyum, krom (paslanmaz çelik), demir-çelik, kablo, radyatör, elektrik motoru, kurşun, akü, çinko/zamak, karışık metal.
@@ -12,8 +14,11 @@ Bakır, sarı (pirinç), alüminyum, krom (paslanmaz çelik), demir-çelik, kabl
 ## Nasıl çalışır
 1. Arayın veya WhatsApp'tan yazın.
 2. Hurdanın fotoğrafını gönderin, cinsine göre ön fiyat alın.
-3. Uygun zamanda yerinden alım yapılır.
-4. Hurda gözünüzün önünde tartılır, tutar ödenir.
+3. Uygun zamanda adresinizden alım yapılır.
+4. Hurda gözünüzün önünde tartılır, ödeme kapıda nakit yapılır.
+
+## Ayrıntılar
+- [Tam bilgi (llms-full.txt)](https://bursahurdaalimi.com.tr/llms-full.txt): metal cinsleri, fiyatlandırma, sık sorulan sorular
 
 ## Sayfalar
 - [Ana sayfa](https://bursahurdaalimi.com.tr/)

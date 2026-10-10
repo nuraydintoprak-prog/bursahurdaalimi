@@ -1,4 +1,13 @@
 /* Hurdacı Servet — Bursa metal hurda alımı · açık tema, logo renkleri (sarı-turuncu + siyah) */
+/* Fontlar kendi sunucumuzdan (Google Fonts isteği yok). Türkçe ğ/ş/İ latin-ext'te. */
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../fonts/inter-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../fonts/inter-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500 700; font-display: swap; src: url(../fonts/oswald-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500 700; font-display: swap; src: url(../fonts/oswald-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* Yedek fontlar Inter/Oswald ölçülerine ayarlı → font yüklenince düzen kayması olmaz */
+@font-face { font-family: "Inter Fallback"; src: local("Arial"); size-adjust: 107.06%; ascent-override: 90.44%; descent-override: 22.52%; line-gap-override: 0%; }
+@font-face { font-family: "Oswald Fallback"; src: local("Arial Narrow"), local("Arial"); size-adjust: 96%; ascent-override: 120%; descent-override: 29%; line-gap-override: 0%; }
+
 :root {
   --bg: #faf7f2;          /* sıcak beyaz */
   --bg-2: #f2ede4;        /* alternatif bölüm */
@@ -24,12 +33,12 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 400 16px/1.65 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font: 400 16px/1.65 "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
-h1, h2, h3 { font-family: "Oswald", "Inter", system-ui, sans-serif; line-height: 1.15; margin: 0 0 .5em; letter-spacing: .01em; color: var(--ink); }
+h1, h2, h3 { font-family: "Oswald", "Oswald Fallback", "Inter", "Inter Fallback", system-ui, sans-serif; line-height: 1.15; margin: 0 0 .5em; letter-spacing: .01em; color: var(--ink); }
 h1 { font-size: clamp(2.1rem, 5.4vw, 3.6rem); font-weight: 700; }
 h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 600; }
 h3 { font-size: 1.2rem; font-weight: 600; }
@@ -54,8 +63,9 @@ p { margin: 0 0 1em; }
 .btn--line:hover { border-color: var(--brand); }
 .btn--block { width: 100%; }
 .btn--lg { padding: 1em 1.6em; font-size: 1.06rem; }
-.btn--pulse { animation: pulse 2.4s ease-in-out infinite; }
-@keyframes pulse { 0%, 100% { box-shadow: 0 8px 20px rgba(245, 160, 0, .35), 0 0 0 0 rgba(245, 160, 0, .45); } 50% { box-shadow: 0 8px 20px rgba(245, 160, 0, .35), 0 0 0 12px rgba(245, 160, 0, 0); } }
+.btn--pulse { position: relative; isolation: isolate; }
+.btn--pulse::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--brand); z-index: -1; animation: pulse 2.4s ease-out infinite; will-change: transform, opacity; }
+@keyframes pulse { 0% { transform: scale(1); opacity: .55; } 70%, 100% { transform: scale(1.18, 1.45); opacity: 0; } }
 
 /* Üst şerit + header */
 .topbar { background: var(--ink); color: #f4efe6; font-size: .88rem; font-weight: 600; }
@@ -76,7 +86,7 @@ p { margin: 0 0 1em; }
 /* Kayan avantaj şeridi */
 .ticker { background: var(--brand); color: var(--ink); overflow: hidden; border-bottom: 3px solid var(--ink); }
 .ticker__track { display: flex; width: max-content; animation: ticker 32s linear infinite; }
-.ticker__track span { display: inline-flex; align-items: center; gap: 10px; padding: 11px 26px; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
+.ticker__track span { display: inline-flex; align-items: center; gap: 10px; padding: 11px 26px; font-family: "Oswald", "Oswald Fallback", sans-serif; font-weight: 600; font-size: 1.05rem; letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
 .ticker__track span::after { content: "◆"; margin-left: 26px; font-size: .7rem; opacity: .55; }
 .ticker:hover .ticker__track { animation-play-state: paused; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -103,7 +113,7 @@ p { margin: 0 0 1em; }
 .media--banner { aspect-ratio: 16 / 9; margin: 0 0 40px; box-shadow: var(--shadow); border: 6px solid #fff; }
 .media__tag { position: absolute; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; background: var(--ink); color: #fff; font-weight: 800; font-size: .95rem; box-shadow: var(--shadow); }
 .media__tag .ic { color: var(--brand-2); width: 22px; height: 22px; }
-.media figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 16px 12px; background: linear-gradient(transparent, rgba(16, 18, 20, .82)); color: #fff; font-family: "Oswald", sans-serif; font-size: 1.05rem; letter-spacing: .02em; }
+.media figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 16px 12px; background: linear-gradient(transparent, rgba(16, 18, 20, .82)); color: #fff; font-family: "Oswald", "Oswald Fallback", sans-serif; font-size: 1.05rem; letter-spacing: .02em; }
 
 /* Bölümler */
 section { scroll-margin-top: 84px; }
@@ -117,7 +127,7 @@ section { scroll-margin-top: 84px; }
 .metals { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
 .metal { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-sm); transition: border-color .2s, transform .2s, box-shadow .2s; }
 .metal:hover { border-color: var(--brand); transform: translateY(-3px); box-shadow: var(--shadow); }
-.metal__dot { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-family: "Oswald", sans-serif; font-weight: 700; font-size: .95rem; color: #111; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .12); }
+.metal__dot { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-family: "Oswald", "Oswald Fallback", sans-serif; font-weight: 700; font-size: .95rem; color: #111; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .12); }
 .metal h3 { margin: 4px 0 0; }
 .metal p { color: var(--muted); font-size: .93rem; margin: 0; }
 .metal--cu .metal__dot { background: linear-gradient(135deg, #e08a4a, #b45f24); color: #fff; }
@@ -147,7 +157,7 @@ section { scroll-margin-top: 84px; }
 /* Nasıl çalışır */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
 .step { position: relative; padding: 30px 20px 20px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow-sm); }
-.step::before { counter-increment: step; content: counter(step); position: absolute; top: -16px; left: 20px; width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: var(--ink); font-family: "Oswald", sans-serif; font-weight: 700; display: grid; place-items: center; font-size: 1.05rem; border: 3px solid var(--bg); }
+.step::before { counter-increment: step; content: counter(step); position: absolute; top: -16px; left: 20px; width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: var(--ink); font-family: "Oswald", "Oswald Fallback", sans-serif; font-weight: 700; display: grid; place-items: center; font-size: 1.05rem; border: 3px solid var(--bg); }
 .step p { color: var(--muted); font-size: .93rem; margin: 0; }
 .steps__cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
 
@@ -159,7 +169,7 @@ section { scroll-margin-top: 84px; }
 .reviews-head { margin: 56px 0 20px; }
 .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .review { margin: 0; padding: 24px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--panel); position: relative; box-shadow: var(--shadow-sm); }
-.review::before { content: "\201C"; position: absolute; top: 4px; right: 18px; font-family: "Oswald", serif; font-size: 4.2rem; line-height: 1; color: var(--brand); opacity: .45; }
+.review::before { content: "\201C"; position: absolute; top: 4px; right: 18px; font-family: "Oswald", "Oswald Fallback", serif; font-size: 4.2rem; line-height: 1; color: var(--brand); opacity: .45; }
 .review__stars { display: block; color: var(--brand); letter-spacing: .12em; font-size: 1.1rem; margin-bottom: 8px; }
 .review p { color: var(--text); margin: 0 0 14px; }
 .review footer { display: flex; flex-direction: column; font-size: .9rem; }
@@ -213,7 +223,7 @@ a.ccard:hover { border-color: var(--brand); }
 /* Footer */
 .footer { padding: 50px 0 100px; background: #1d2126; color: #b9c0c8; font-size: .92rem; }
 .footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; }
-.footer h4 { color: #fff; font-family: "Oswald", sans-serif; font-weight: 600; margin: 0 0 10px; font-size: 1.05rem; }
+.footer h4 { color: #fff; font-family: "Oswald", "Oswald Fallback", sans-serif; font-weight: 600; margin: 0 0 10px; font-size: 1.05rem; }
 .footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .footer a:hover { color: var(--brand-2); }
 .footer__bottom { margin-top: 28px; padding-top: 18px; border-top: 1px solid #343a41; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: .85rem; }
@@ -239,7 +249,7 @@ a.ccard:hover { border-color: var(--brand); }
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
   .ticker__track { animation: none; }
-  .btn--pulse { animation: none; }
+  .btn--pulse::after { animation: none; display: none; }
 }
 
 /* Duyarlı */
