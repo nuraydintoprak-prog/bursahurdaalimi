@@ -3,7 +3,7 @@
 
   var body = document.body;
   var hamburger = document.getElementById('hamburger');
-  var WA = '905353480448';
+  var WA = '905307655116';
 
   // Mobil menü
   if (hamburger) {
