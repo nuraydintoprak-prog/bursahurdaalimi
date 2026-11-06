@@ -2,8 +2,8 @@
 /* Fontlar kendi sunucumuzdan (Google Fonts isteği yok). Türkçe ğ/ş/İ latin-ext'te. */
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../fonts/inter-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../fonts/inter-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500 700; font-display: swap; src: url(../fonts/oswald-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500 700; font-display: swap; src: url(../fonts/oswald-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500 700; font-display: optional; src: url(../fonts/oswald-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Oswald"; font-style: normal; font-weight: 500 700; font-display: optional; src: url(../fonts/oswald-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 /* Yedek fontlar Inter/Oswald ölçülerine ayarlı → font yüklenince düzen kayması olmaz */
 @font-face { font-family: "Inter Fallback"; src: local("Arial"); size-adjust: 107.06%; ascent-override: 90.44%; descent-override: 22.52%; line-gap-override: 0%; }
 @font-face { font-family: "Oswald Fallback"; src: local("Arial Narrow"), local("Arial"); size-adjust: 96%; ascent-override: 120%; descent-override: 29%; line-gap-override: 0%; }
@@ -20,7 +20,7 @@
   --brand-2: #ffbe2e;
   --brand-dark: #c97800;
   --brand-dim: #fff3d6;
-  --wa: #1fa855;
+  --wa: #15803d;
   --radius: 16px;
   --max: 1160px;
   --shadow: 0 12px 32px rgba(40, 30, 10, .10);
@@ -58,7 +58,7 @@ p { margin: 0 0 1em; }
 .btn:hover { transform: translateY(-2px); }
 .btn--call { background: var(--brand); color: var(--ink); box-shadow: 0 8px 20px rgba(245, 160, 0, .35); }
 .btn--call:hover { background: var(--brand-2); }
-.btn--wa { background: var(--wa); color: #fff; box-shadow: 0 8px 20px rgba(31, 168, 85, .28); }
+.btn--wa { background: var(--wa); color: #fff; box-shadow: 0 8px 20px rgba(21, 128, 61, .28); }
 .btn--line { border-color: var(--line); color: var(--text); background: var(--panel); }
 .btn--line:hover { border-color: var(--brand); }
 .btn--block { width: 100%; }
