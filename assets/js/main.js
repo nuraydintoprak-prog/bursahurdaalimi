@@ -40,26 +40,19 @@
     revealEls.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  // Gerçek etkileşim izi: AntiClick sunucusundaki "sahte arama" kuralıyla aynı ölçüt
-  // (en az 3 sn sayfada kalma + fare/dokunma/kaydırma/klavye etkileşimi).
+  // Gerçek etkileşim izi: en az 3 sn sayfada kalma + fare/dokunma/kaydırma/klavye etkileşimi.
   var loadedAt = Date.now();
   var engaged = false;
   ['mousemove', 'touchstart', 'scroll', 'keydown'].forEach(function (t) {
     window.addEventListener(t, function () { engaged = true; }, { passive: true, once: true });
   });
 
-  // GTM dönüşüm olayları: AntiClick ziyaretçiyi temiz onaylarsa gönderilir (bot tıklaması dönüşüm sayılmaz).
-  // AntiClick yüklenemezse olay yine gönderilir. Kod ile tetiklenen (isTrusted=false), sayfa açılır
-  // açılmaz ya da hiçbir etkileşim olmadan yapılan tıklamalar dönüşüm sayılmaz.
+  // GTM dönüşüm olayları. Kod ile tetiklenen (isTrusted=false), sayfa açılır açılmaz
+  // ya da hiçbir etkileşim olmadan yapılan tıklamalar dönüşüm sayılmaz.
   function pushClean(ev, domEvent) {
     if (domEvent && (!domEvent.isTrusted || !engaged || Date.now() - loadedAt < 3000)) return;
     window.dataLayer = window.dataLayer || [];
-    var ac = window.AntiClick;
-    if (ac && typeof ac.isClean === 'function') {
-      ac.isClean().then(function (ok) { if (ok) window.dataLayer.push(ev); });
-    } else {
-      window.dataLayer.push(ev);
-    }
+    window.dataLayer.push(ev);
   }
 
   // Arama / WhatsApp tıklamaları
